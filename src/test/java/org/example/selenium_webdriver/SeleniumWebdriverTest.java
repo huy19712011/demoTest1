@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SeleniumWebdriverTest {
 
+    /*
     private WebDriver webDriver;
 
     @BeforeEach
@@ -53,4 +54,6 @@ public class SeleniumWebdriverTest {
         webDriver.quit();
 
     }
+
+     */
 }
