@@ -4,6 +4,8 @@ import org.example.entity.Student;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentServiceTest {
@@ -53,7 +55,25 @@ class StudentServiceTest {
 
 
     @Test
-    void getStudentById() {
+    void getStudentByIdWithValidId() {
+
+        Student student = new Student(1, "Alice", 20, 9.0);
+        studentService.addStudent(student);
+
+        assertEquals(student, studentService.getStudentById(1));
+        assertEquals(Optional.of(student), studentService.getStudentByIdV2(1));
+    }
+
+    @Test
+    void getStudentByIdWithInvalidId() {
+
+        Student student = new Student(1, "Alice", 20, 9.0);
+        studentService.addStudent(student);
+
+        assertNull(studentService.getStudentById(10));
+
+        assertEquals(Optional.empty(), studentService.getStudentByIdV2(10));
+
     }
 
     @Test
@@ -119,16 +139,28 @@ class StudentServiceTest {
 
 
 
-
-
-
-
     @Test
     void updateStudentV2() {
     }
 
+
     @Test
-    void deleteStudent() {
+    void deleteStudentWithValidId() {
+
+        Student student = new Student(1, "Alice", 20, 9.0);
+        studentService.addStudent(student);
+
+        studentService.deleteStudent(1);
+        assertEquals(0, studentService.getAllStudents().size());
+    }
+
+    @Test
+    void deleteStudentWithInvalidId() {
+
+        Student student = new Student(1, "Alice", 20, 9.0);
+        studentService.addStudent(student);
+
+        assertFalse(studentService.deleteStudent(10));
     }
 
     @Test
